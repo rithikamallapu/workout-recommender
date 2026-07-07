@@ -277,6 +277,7 @@ MUSCLE_ICON = {
 }
 
 if st.session_state.plan:
+    li = st.session_state.last_inputs
     st.markdown('<div class="section-heading">📋 Your Personalized Workout Plan</div>', unsafe_allow_html=True)
 
     left_col, right_col = st.columns([3, 2])
