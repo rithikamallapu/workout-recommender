@@ -1,0 +1,66 @@
+"""
+generate_dataset.py
+--------------------
+Creates the structured exercise dataset used by the recommendation engine.
+"""
+
+import pandas as pd
+import os
+
+EXERCISES = [
+    ("Push Ups", "chest", "bodyweight", "beginner", "strength", "muscle_gain"),
+    ("Incline Dumbbell Press", "chest", "dumbbell", "intermediate", "strength", "muscle_gain"),
+    ("Straight-Arm Dumbbell Pullover", "chest", "dumbbell", "intermediate", "strength", "muscle_gain"),
+    ("One-Arm Kettlebell Floor Press", "chest", "kettlebells", "intermediate", "strength", "muscle_gain"),
+    ("Barbell Bench Press", "chest", "barbell", "advanced", "strength", "muscle_gain"),
+    ("Chest Fly", "chest", "dumbbell", "beginner", "strength", "muscle_gain"),
+    ("Cable Crossover", "chest", "cable", "advanced", "strength", "muscle_gain"),
+    ("Pull Ups", "back", "bodyweight", "advanced", "strength", "muscle_gain"),
+    ("Bent-Over Row", "back", "barbell", "intermediate", "strength", "muscle_gain"),
+    ("Lat Pulldown", "back", "cable", "beginner", "strength", "muscle_gain"),
+    ("Single-Arm Dumbbell Row", "back", "dumbbell", "beginner", "strength", "muscle_gain"),
+    ("Superman Hold", "back", "bodyweight", "beginner", "strength", "fat_loss"),
+    ("Deadlift", "back", "barbell", "advanced", "strength", "muscle_gain"),
+    ("Bodyweight Squat", "legs", "bodyweight", "beginner", "strength", "fat_loss"),
+    ("Lunges", "legs", "bodyweight", "beginner", "strength", "fat_loss"),
+    ("Barbell Squat", "legs", "barbell", "advanced", "strength", "muscle_gain"),
+    ("Leg Press", "legs", "machine", "intermediate", "strength", "muscle_gain"),
+    ("Jump Squats", "legs", "bodyweight", "intermediate", "cardio", "fat_loss"),
+    ("Bulgarian Split Squat", "legs", "dumbbell", "advanced", "strength", "muscle_gain"),
+    ("Calf Raises", "legs", "bodyweight", "beginner", "strength", "muscle_gain"),
+    ("Bicep Curl", "arms", "dumbbell", "beginner", "strength", "muscle_gain"),
+    ("Hammer Curl", "arms", "dumbbell", "beginner", "strength", "muscle_gain"),
+    ("Tricep Dips", "arms", "bodyweight", "intermediate", "strength", "muscle_gain"),
+    ("Skull Crushers", "arms", "barbell", "intermediate", "strength", "muscle_gain"),
+    ("Diamond Push Ups", "arms", "bodyweight", "advanced", "strength", "muscle_gain"),
+    ("Shoulder Press", "shoulders", "dumbbell", "intermediate", "strength", "muscle_gain"),
+    ("Lateral Raise", "shoulders", "dumbbell", "beginner", "strength", "muscle_gain"),
+    ("Front Raise", "shoulders", "dumbbell", "beginner", "strength", "muscle_gain"),
+    ("Arnold Press", "shoulders", "dumbbell", "advanced", "strength", "muscle_gain"),
+    ("Pike Push Ups", "shoulders", "bodyweight", "intermediate", "strength", "muscle_gain"),
+    ("Plank", "core", "bodyweight", "beginner", "strength", "fat_loss"),
+    ("Crunches", "core", "bodyweight", "beginner", "strength", "fat_loss"),
+    ("Russian Twist", "core", "bodyweight", "intermediate", "strength", "fat_loss"),
+    ("Leg Raises", "core", "bodyweight", "intermediate", "strength", "fat_loss"),
+    ("Mountain Climbers", "core", "bodyweight", "intermediate", "cardio", "fat_loss"),
+    ("Bicycle Crunch", "core", "bodyweight", "beginner", "cardio", "fat_loss"),
+    ("Jumping Jacks", "cardio", "bodyweight", "beginner", "cardio", "fat_loss"),
+    ("Burpees", "cardio", "bodyweight", "advanced", "cardio", "fat_loss"),
+    ("High Knees", "cardio", "bodyweight", "beginner", "cardio", "fat_loss"),
+    ("Jump Rope", "cardio", "jump_rope", "intermediate", "cardio", "fat_loss"),
+    ("Sprint Intervals", "cardio", "bodyweight", "advanced", "cardio", "fat_loss"),
+]
+
+COLUMNS = ["exercise_name", "muscle_group", "equipment", "difficulty_level", "category", "goal_tag"]
+
+
+def build_dataset() -> pd.DataFrame:
+    return pd.DataFrame(EXERCISES, columns=COLUMNS)
+
+
+if __name__ == "__main__":
+    df = build_dataset()
+    out_path = os.path.join(os.path.dirname(__file__), "..", "data", "exercises.csv")
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    df.to_csv(out_path, index=False)
+    print(f"Saved {len(df)} exercises to {out_path}")
