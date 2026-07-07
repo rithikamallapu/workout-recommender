@@ -20,7 +20,7 @@ np.random.seed(RANDOM_STATE)
 DIFFICULTY_MAP = {"beginner": 0, "intermediate": 1, "advanced": 2}
 
 
-def simulate_training_data(n_samples: int = 4000) -> pd.DataFrame:
+def simulate_training_data(n_samples: int = 10000) -> pd.DataFrame:
     ages = np.random.randint(16, 60, n_samples)
     goals = np.random.choice(["fat_loss", "muscle_gain"], n_samples)
     durations = np.random.randint(15, 75, n_samples)
